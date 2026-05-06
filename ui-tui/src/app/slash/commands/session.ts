@@ -93,6 +93,20 @@ export const sessionCommands: SlashCommand[] = [
   },
 
   {
+    help: 'browse and resume previous sessions',
+    name: 'sessions',
+    category: 'Session',
+    run: (arg, ctx) => {
+      if (ctx.session.guardBusySessionSwitch('switch sessions')) {
+        return
+      }
+      if (!arg.trim()) {
+        return patchOverlayState({ picker: true })
+      }
+    }
+  },
+
+  {
     help: 'attach an image',
     name: 'image',
     run: (arg, ctx) => {
